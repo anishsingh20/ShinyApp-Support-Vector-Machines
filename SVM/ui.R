@@ -15,7 +15,7 @@ shinyUI(fluidPage(
           h1("Support Vector Classifier",align="center",style="color:black"),
           windowTitle = "SVM APP"
         ) ,#close headerpanel
-    
+        
       
       #the sidebar panel consisting of the SVM parameters sliders
         sidebarPanel(
@@ -33,6 +33,8 @@ shinyUI(fluidPage(
       
       #the main panel
       mainPanel(
+        p("A web application made using ShinyR which is used to demonstrate the working of a famous classifier
+            called" ,strong(a("Support vector machines",href="http://rpubs.com/anish20/svmR",target="_blank" )), "and effects of how the hyperparameters effect its classification perfomance."),
         
          plotOutput("svmplot"),
          hr(),
