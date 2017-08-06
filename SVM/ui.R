@@ -65,7 +65,9 @@ shinyUI(fluidPage(
            h3("Confusion Matrix",align="left",style="color:red"),
            p("The daigonals consist of correct classifications and off-diagonals are incorrectly classified") ,
            tableOutput("predmatrix"), #to display the confusion matrix
-           hr() 
+           textOutput("accuracy"),
+           
+      hr() 
          ,
         
         

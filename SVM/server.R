@@ -4,8 +4,6 @@ library(shiny)
 library(e1071)#the SVM package
 
 
-
-
 # Define server logic 
 shinyServer(
   function(input, output) {
@@ -17,12 +15,14 @@ shinyServer(
         c<-input$cparam
         shift<-input$shift
         gamma<-input$gamma 
+        
         #generating data with 2 variables and a binary response
         posClass <- data.frame(x1=rnorm(n/2,0), x2=rnorm(n/2,0))#variable1
-        negClass <- data.frame(x1=rnorm(n/2,shift), x2=rnorm(n/2,shift))#variable2        myData <- rbind(posClass,negClass)
+        negClass <- data.frame(x1=rnorm(n/2,shift), x2=rnorm(n/2,shift))#variable2        
+        myData <- rbind(posClass,negClass)
         y <- c(rep(1,n/2), rep(-1,n/2)) #response variable
         myData$y<-as.factor(y)
-       
+        
         #fitting the radial SVM
         Radialsvm<-svm(y ~ .,data=myData,kernel="radial",cost=c,gamma=gamma
                        ,scale=F)
@@ -31,9 +31,58 @@ shinyServer(
         
         
         
-    }
+      }
     )#close renderPlot
     
+    
+    output$predmatrix<- renderTable({
+      
+      set.seed(1002) 
+      n<-input$datapoints
+      c<-input$cparam
+      shift<-input$shift
+      gamma<-input$gamma 
+      
+      #generating data with 2 variables and a binary response
+      posClass <- data.frame(x1=rnorm(n/2,0), x2=rnorm(n/2,0))#variable1
+      negClass <- data.frame(x1=rnorm(n/2,shift), x2=rnorm(n/2,shift))#variable2        
+      myData <- rbind(posClass,negClass)
+      y <- c(rep(1,n/2), rep(-1,n/2)) #response variable
+      myData$y<-as.factor(y)
+      
+      #fitting the radial SVM
+      Radialsvm<-svm(y ~ .,data=myData,kernel="radial",cost=c,gamma=gamma
+                     ,scale=F)
+      pred<-predict(Radialsvm,newdata=myData[,-3])
+      table(pred,actual=myData[,3])
+      
+      
+    })
+    
+    output$accuracy<-renderText({
+      set.seed(1002) 
+      n<-input$datapoints
+      c<-input$cparam
+      shift<-input$shift
+      gamma<-input$gamma 
+      
+      #generating data with 2 variables and a binary response
+      posClass <- data.frame(x1=rnorm(n/2,0), x2=rnorm(n/2,0))#variable1
+      negClass <- data.frame(x1=rnorm(n/2,shift), x2=rnorm(n/2,shift))#variable2        
+      myData <- rbind(posClass,negClass)
+      y <- c(rep(1,n/2), rep(-1,n/2)) #response variable
+      myData$y<-as.factor(y)
+      
+      #fitting the radial SVM
+      Radialsvm<-svm(y ~ .,data=myData,kernel="radial",cost=c,gamma=gamma
+                     ,scale=F)
+      pred<-predict(Radialsvm,newdata=myData[,-3])
+      
+      paste("The accuracy is ",mean(pred==myData[,3])*100,"%")
+      
+      
+    })
+  
     
     
   }
