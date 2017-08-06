@@ -5,7 +5,17 @@ library(e1071)#the SVM package
 
 # Define server logic 
 shinyServer(
-  function(input, output) {}
+  function(input, output) {
+    output$svmplot<-renderPlot(
+      {
+        hist(rnorm(input$datapoints))
+        
+    }
+    )#close renderPlot
+    
+    
+    
+  }
   
 )
   

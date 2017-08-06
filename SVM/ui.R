@@ -16,6 +16,8 @@ shinyUI(fluidPage(
           windowTitle = "SVM APP"
         ) ,#close headerpanel
         
+        
+        
       
       #the sidebar panel consisting of the SVM parameters sliders
         sidebarPanel(
@@ -27,7 +29,7 @@ shinyUI(fluidPage(
           
           sliderInput("cparam","Regularization parameter C",value = 10, min = 0.1, max = 100, step = 0.5),
           
-          sliderInput("gamma","Tuning Paramater γ",value = 1, min = 0.001, max = 20, step = 0.05)
+          sliderInput("gamma","Tuning Paramater Gamma",value = 1, min = 0.001, max = 20, step = 0.05)
         
       ) ,
       
@@ -36,13 +38,13 @@ shinyUI(fluidPage(
         p("A web application made using ShinyR which is used to demonstrate the working of a famous classifier
             called" ,strong(a("Support vector machines",href="http://rpubs.com/anish20/svmR",target="_blank" )), "and effects of how the hyperparameters effect its classification perfomance."),
         
-         plotOutput("svmplot"),
+         plotOutput("svmplot"),#to display the plot output
          hr(),
          
            
            h3("Confusion Matrix",align="left",style="color:red"),
            p("The daigonals consist of correct classifications and off-diagonals are incorrectly classified") ,
-           tableOutput("predmatrix"),
+           tableOutput("predmatrix"), #to display the confusion matrix
            hr() 
          ,
         
@@ -65,7 +67,7 @@ shinyUI(fluidPage(
               h3("Tuning Parameters",align="left",style="color:black"),
               p("SVM use 2 different types of hyperparameters which we have to select and cannot be learned via training.
                 It uses C known as Regularization parameter which is used to control the Bias and the Variance of the Model.
-                Second is γ which is also a tuning parameter which determines the smoothness of the Non linear decision boundary")
+                Second is Gamma-γ which is also a tuning parameter which determines the smoothness of the Non linear decision boundary.")
               
               
               
