@@ -8,13 +8,33 @@ shinyUI(fluidPage(
       #setting theme
       theme = shinytheme("yeti"),
       
+      titlePanel(
+        fluidRow(
+        column(12,    
+        
+        div(style="opacity:0.6;padding: 2px",
+        h1("Support Vector Classifier",align="center",style="color:black")
+          )
+         )
+        )
+       ) 
+      ,
+      
+      hr(style="border-top: 4px double black") ,
+      h4("(Made by-Anish Singh Walia)",align="center"),
+      
       pageWithSidebar(
         
       #the header
         headerPanel(
-          h1("Support Vector Classifier",align="center",style="color:black"),
+          title="",
           windowTitle = "SVM APP"
         ) ,#close headerpanel
+        
+        
+        
+        
+        
         
         
         
@@ -36,7 +56,7 @@ shinyUI(fluidPage(
       #the main panel
       mainPanel(
         p("A web application made using ShinyR which is used to demonstrate the working of a famous classifier
-            called" ,strong(a("Support vector machines",href="http://rpubs.com/anish20/svmR",target="_blank" )), "and effects of how the hyperparameters effect its classification perfomance."),
+            called" ,strong(a("Support vector machines",href="http://rpubs.com/anish20/svmR",target="_blank" )), "and shows the effect of how the hyperparameters effect its classification perfomance."),
         
          plotOutput("svmplot"),#to display the plot output
          hr(),
